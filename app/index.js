@@ -6,6 +6,7 @@ var USER_DATA = {
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Routes = require('./config/routes');
 
 var ProfilePic = React.createClass({
   render: function(){
@@ -15,13 +16,26 @@ var ProfilePic = React.createClass({
   }
 });
 
+var Link = React.createClass({
+  changeUrl: function () {
+    window.location.replace(this.props.href);
+  },
+  render: function(){
+    return(
+      <span style={{color: 'blue', cursor:'pointer'}} onClick={this.changeUrl}>
+        {this.props.children}
+      </span>
+    )
+  }
+});
+
 var ProfileLink = React.createClass({
   render: function(){
     return(
       <div>
-        <a>
+        <Link href={"https://github.com/" + this.props.username}>
           {this.props.username}
-        </a>
+        </Link>
       </div>
     )
   }
@@ -58,4 +72,6 @@ var Avatar = React.createClass({
   }
 });
 
-ReactDOM.render(<Avatar user={USER_DATA} />, document.getElementById('app'));
+//ReactDOM.render(<Avatar user={USER_DATA} />, document.getElementById('app'));
+
+ReactDOM.render(Routes, document.getElementById('app'));
